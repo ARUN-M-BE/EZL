@@ -441,6 +441,17 @@ app.get('/api/bookings/all', async (req, res) => {
     }
 });
 
+// Delete booking (admin)
+app.delete('/api/bookings/:id', async (req, res) => {
+    try {
+        await dbRun('DELETE FROM bookings WHERE id = ?', [req.params.id]);
+        res.json({ message: 'Booking deleted successfully' });
+    } catch (error) {
+        console.error('Delete booking error:', error);
+        res.status(500).json({ message: 'Error deleting booking' });
+    }
+});
+
 // --- Review & Progress Routes ---
 
 app.post('/api/reviews', async (req, res) => {

@@ -22,6 +22,7 @@ import Login from './src/pages/Login';
 import Register from './src/pages/Register';
 import Learners from './src/pages/Learners';
 import AdminDashboard from './src/pages/AdminDashboard';
+import AdminBookings from './src/pages/AdminBookings';
 import { ProtectedRoute } from './src/components/ProtectedRoute';
 
 import { TEST_CENTRES } from './types';
@@ -51,6 +52,7 @@ const App = () => {
 
               <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/bookings" element={<AdminBookings />} />
               </Route>
 
               <Route path="/compare" element={<Compare />} />
