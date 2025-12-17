@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
-import { generateChatResponse } from '../services/gemini';
+import { generateChatResponse } from '../../services/gemini';
 
 export const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{role: 'user' | 'model', text: string}[]>([
-      {role: 'model', text: 'Hi! I am EzBot. Ask me about driving rules or finding an instructor.'}
+  const [messages, setMessages] = useState<{ role: 'user' | 'model', text: string }[]>([
+    { role: 'model', text: 'Hi! I am EzBot. Ask me about driving rules or finding an instructor.' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +25,7 @@ export const ChatWidget: React.FC = () => {
     setIsLoading(true);
 
     const response = await generateChatResponse(messages, userMsg);
-    
+
     setMessages(prev => [...prev, { role: 'model', text: response || "Sorry, I couldn't assist with that." }]);
     setIsLoading(false);
   };
@@ -45,13 +45,13 @@ export const ChatWidget: React.FC = () => {
         <div className="bg-white rounded-lg shadow-2xl w-80 sm:w-96 flex flex-col h-[500px] border border-gray-200 overflow-hidden">
           <div className="bg-brand-600 p-4 flex justify-between items-center text-white">
             <h3 className="font-bold flex items-center gap-2">
-                <MessageCircle size={20}/> EzBot Assistant
+              <MessageCircle size={20} /> EzBot Assistant
             </h3>
             <button onClick={() => setIsOpen(false)} className="hover:bg-brand-700 p-1 rounded">
               <X size={20} />
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" ref={scrollRef}>
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -78,10 +78,10 @@ export const ChatWidget: React.FC = () => {
               placeholder="Ask about road rules..."
               className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
-            <button 
-                onClick={handleSend}
-                disabled={isLoading}
-                className="bg-brand-600 hover:bg-brand-700 text-white p-2 rounded-md disabled:opacity-50"
+            <button
+              onClick={handleSend}
+              disabled={isLoading}
+              className="bg-brand-600 hover:bg-brand-700 text-white p-2 rounded-md disabled:opacity-50"
             >
               <Send size={18} />
             </button>

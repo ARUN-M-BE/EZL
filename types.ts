@@ -18,12 +18,33 @@ export interface Instructor {
   coordinates: { x: number; y: number }; // For map simulation
 }
 
+export interface Learner {
+  id: string;
+  name: string;
+  location: string;
+  bio: string;
+  image: string;
+  transmission_preference: string;
+}
+
 export interface Review {
   id: string;
   author: string;
   rating: number;
   text: string;
   date: string;
+}
+
+export interface Booking {
+  id: string;
+  learner_id: string;
+  instructor_id: string;
+  date: string;
+  status: 'confirmed' | 'pending' | 'completed' | 'cancelled';
+  package_id?: string;
+  instructor_name?: string; // Enhanced field from join
+  vehicle?: string; // Enhanced field from join
+  learner_name?: string; // Enhanced field from join
 }
 
 export interface Package {
@@ -111,8 +132,8 @@ export const MOCK_PACKAGES: Package[] = [
 ];
 
 export const TEST_CENTRES = [
-    { name: 'Bondi Junction', x: 280, y: 190 },
-    { name: 'Chatswood', x: 130, y: 110 },
-    { name: 'Silverwater', x: 180, y: 280 },
-    { name: 'Marrickville', x: 220, y: 220 },
+  { name: 'Bondi Junction', x: 280, y: 190 },
+  { name: 'Chatswood', x: 130, y: 110 },
+  { name: 'Silverwater', x: 180, y: 280 },
+  { name: 'Marrickville', x: 220, y: 220 },
 ];
